@@ -781,8 +781,23 @@
       });
       document.querySelectorAll(".faq-title").forEach((title) => {
         title.addEventListener("click", () => {
+          document.querySelectorAll(".faq-item").forEach((i) => {
+            const content = i.querySelector(".faq-content");
+            if (i !== title.parentElement) {
+              content.style.maxHeight = null;
+              i.classList.remove("active");
+            }
+          });
+
           const item = title.parentElement;
-          item.classList.toggle("active");
+          const content = title.nextElementSibling;
+          if (item.classList.contains("active")) {
+            content.style.maxHeight = null;
+            item.classList.remove("active");
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            item.classList.add("active");
+          }
         });
       });
     </script>
